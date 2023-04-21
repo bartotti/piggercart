@@ -5,7 +5,6 @@ import {
   fetchCartItemsAsync,
 } from "./api/store/cartitemSlice";
 
-
 export default function popUpWindow({ product }) {
   const [qty, setQty] = useState(0);
   const dispatch = useDispatch();
@@ -24,6 +23,9 @@ export default function popUpWindow({ product }) {
     setQty(event.target.value);
   };
 
+  if (!product) {
+    return;
+  }
   return (
     <div>
       <img src={product.image} alt={product.name} />
