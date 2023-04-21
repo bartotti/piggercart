@@ -21,14 +21,19 @@ export default function mainScreen() {
   };
 
   return (
-    <div>
+    <div className="product-main">
       {products.map((product, index) => (
-        <div key={index}>
+        <div
+          key={index}
+          className="product-section"
+          style={{ display: "inline-block", width: "50%" }}
+        >
           <img
+            className="product-img"
             src={`/${product.image}`}
             alt="product image list"
             onClick={() => handleImageClick(index)}
-            style={{ cursor: "pointer" }}
+            style={{ cursor: "pointer", maxWidth: "100%" }}
           />
         </div>
       ))}

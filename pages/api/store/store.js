@@ -4,7 +4,7 @@ import cartitemSlice from "./cartitemSlice";
 
 const store = configureStore({
   reducer: {
-    cartitem: cartitemSlice,
+    cartItems: cartitemSlice,
   },
 });
 

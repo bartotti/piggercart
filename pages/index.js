@@ -1,5 +1,4 @@
-import popupwindow from "./com/popUpWindow";
-import MainScreen from "./com/mainScreen";
+import MainScreen from "./mainScreen";
 
 export default function Home() {
   return (
