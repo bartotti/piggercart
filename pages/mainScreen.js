@@ -1,16 +1,27 @@
 import React, { useState } from "react";
-import Cartitems from "./cartitems";
+//import Cartitems from "./cartitems";
 import PopUpWindow from "./popUpWindow";
+import Searchorder from "./searchorder";
 
 const products = [
-  { name: "plate 1", price: 1.99, image: "plate1.jpeg", description: "zxc123" },
+  {
+    name: "plate 1",
+    price: 1.99,
+    image: "plate1.jpeg",
+    description: "zxc123",
+  },
   {
     name: "plate 2",
     price: 2.99,
     image: "plate2.jpeg",
     description: "acc1723",
   },
-  { name: "plate 3", price: 3.99, image: "plate3.jpeg", description: "zbzc53" },
+  {
+    name: "plate 3",
+    price: 3.99,
+    image: "plate3.jpeg",
+    description: "zbzc53",
+  },
 ];
 
 export default function mainScreen() {
@@ -40,9 +51,7 @@ export default function mainScreen() {
       {selectedProductIndex !== -1 && (
         <PopUpWindow product={products[selectedProductIndex]} />
       )}
-      <div>
-        <Cartitems />
-      </div>
+      <div>{/* <Cartitems /> */}</div>
     </div>
   );
 }

@@ -3,6 +3,49 @@ body {
   height: 100%;
 }
 
+/* Style the order details container */
+.order-details {
+  background-color: #f8f8ff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  width: 300px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Style the order details header */
+.order-details h1 {
+  font-size: 18px;
+  text-align: center;
+}
+
+/* Style the input and button */
+.order-details input[type="number"],
+.order-details button {
+  display: block;
+  margin: 10px auto;
+  padding: 5px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Style the search button */
+.order-details button {
+  background-color: #a9a9a9;
+  color: white;
+}
+
+/* Style the order details list */
+.order-details ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 @media (max-width: 700px) {
   /* .product-section {
     columns: 1;

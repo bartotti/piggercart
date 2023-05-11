@@ -10,6 +10,7 @@ export default function popUpWindow({ product }) {
   const dispatch = useDispatch();
 
   const handleAddToCart = async () => {
+    await dispatch(fetchCartItemsAsync());
     const cartItem = {
       name: product.name,
       price: product.price,

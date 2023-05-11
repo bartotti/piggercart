@@ -6,9 +6,11 @@ import {
   removeCartItemAsync,
   updateQtyAsync,
 } from "./api/store/cartitemSlice";
+import { createOrderAsync } from "./api/store/orderSlice";
 
 function CartItems() {
   const [newQty, setNewQty] = useState("");
+  const [total, setTotal] = useState(0);
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);
 
@@ -16,23 +18,34 @@ function CartItems() {
     dispatch(fetchCartItemsAsync());
   }, [dispatch]);
 
+  useEffect(() => {
+    const newTotal = cartItems.reduce((acc, item) => {
+      const total = (item.qty ?? 0) * (item.price ?? 0);
+      return acc + total;
+    }, 0);
+    setTotal(newTotal);
+  }, [cartItems]);
+
   const handleRemoveItem = async itemId => {
     await dispatch(removeCartItemAsync(itemId));
     await dispatch(fetchCartItemsAsync());
   };
 
-  const handleQtyChange = (itemId, newQty) => {
-    dispatch(updateQtyAsync({ itemId, newQty }));
-    dispatch(fetchCartItemsAsync());
+  const handleCreateOrder = async () => {
+    createOrderAsync({ orderList: JSON.stringify(cartItems) });
+    alert(cartItems.id);
   };
 
-  const handleInputChange = e => {
-    setNewQty(e.target.value);
+  const handleRemoveAllItems = async () => {
+    for (const cartItem of cartItems) {
+      await handleRemoveItem(cartItem.id);
+    }
+    await dispatch(fetchCartItemsAsync());
   };
 
-  const handleUpdateQty = (itemId, qty) => {
-    handleQtyChange(itemId, qty);
-    setNewQty("");
+  const handleUpdateQty = async (itemId, qty) => {
+    await dispatch(updateQtyAsync({ id: itemId, qty: qty }));
+    await dispatch(fetchCartItemsAsync());
   };
 
   return (
@@ -50,10 +63,9 @@ function CartItems() {
             {"             "}
             <input
               type="number"
-              onChange={handleInputChange}
-              style={{ width: "35px" }}
+              value={newQty}
+              onChange={e => setNewQty(e.target.value)}
             />
-            <br />
             <button onClick={() => handleUpdateQty(item.id, newQty)}>
               Update Qty
             </button>
@@ -61,6 +73,9 @@ function CartItems() {
           </li>
         ))}
       </ul>
+      {/* <p>Total: {total.toFixed(2)}</p> */}
+      <button onClick={handleCreateOrder}>Create Order</button>
+      <button onClick={handleRemoveAllItems}>Remove All Cart Items</button>
     </div>
   );
 }
